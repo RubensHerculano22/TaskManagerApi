@@ -24,7 +24,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $task = auth('api')->user()->task();
+
+        return response()->json($task->paginate('10'), 200);
     }
 
     /**
