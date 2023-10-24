@@ -103,58 +103,34 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "user_id",
+									"key": "category_id",
 									"value": "1",
 									"type": "text"
 								},
 								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
 									"key": "title",
-									"value": "Teste imovel Cat",
+									"value": "Agendar Reunião de Planejamento",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "Apartamento no Jardins",
+									"value": "Organizar com os participantes uma data para a reunião de Planejamento dos Projetos.",
 									"type": "text"
 								},
 								{
-									"key": "content",
-									"value": "Conteúdo",
+									"key": "date_limit",
+									"value": "2023-10-27",
 									"type": "text"
 								},
 								{
-									"key": "price",
-									"value": "19.90",
-									"type": "text"
-								},
-								{
-									"key": "slug",
-									"value": "imovel-test",
-									"type": "text"
-								},
-								{
-									"key": "bedrooms",
-									"value": "2",
-									"type": "text"
-								},
-								{
-									"key": "bathrooms",
-									"value": "1",
-									"type": "text"
-								},
-								{
-									"key": "property_area",
-									"value": "200",
-									"type": "text"
-								},
-								{
-									"key": "total_property_area",
-									"value": "400",
-									"type": "text"
-								},
-								{
-									"key": "categories[]",
-									"value": "2",
+									"key": "done",
+									"value": "0",
 									"type": "text"
 								}
 							]
@@ -194,69 +170,40 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "user_id",
+									"key": "category_id",
 									"value": "1",
 									"type": "text"
 								},
 								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
 									"key": "title",
-									"value": "Apartamento Edited",
+									"value": "Agendar Reunião de Planejamento Editado",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "Apartamento no Jardins",
+									"value": "Organizar com os participantes uma data para a reunião de Planejamento dos Projetos.",
 									"type": "text"
 								},
 								{
-									"key": "content",
-									"value": "Conteúdo",
+									"key": "date_limit",
+									"value": "2023-10-27",
 									"type": "text"
 								},
 								{
-									"key": "price",
-									"value": "19.90",
-									"type": "text"
-								},
-								{
-									"key": "slug",
-									"value": "apartamento",
-									"type": "text"
-								},
-								{
-									"key": "bedrooms",
-									"value": "2",
-									"type": "text"
-								},
-								{
-									"key": "bathrooms",
-									"value": "1",
-									"type": "text"
-								},
-								{
-									"key": "property_area",
-									"value": "200",
-									"type": "text"
-								},
-								{
-									"key": "total_property_area",
-									"value": "400",
-									"type": "text"
-								},
-								{
-									"key": "categories[]",
-									"value": "3",
-									"type": "text"
-								},
-								{
-									"key": "",
-									"value": "",
+									"key": "done",
+									"value": "0",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/v1/tasks/11",
+							"raw": "http://127.0.0.1:8000/api/v1/tasks/16",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -269,7 +216,7 @@
 								"api",
 								"v1",
 								"tasks",
-								"11"
+								"16"
 							]
 						}
 					},
@@ -342,7 +289,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/v1/tasks/12",
+							"raw": "http://127.0.0.1:8000/api/v1/tasks/6",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -355,7 +302,528 @@
 								"api",
 								"v1",
 								"tasks",
-								"12"
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/categories",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/categories/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Compras",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/categories/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"categories",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Compras",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/categories/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"categories",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Apartamento Edited",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Apartamento no Jardins",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Conteúdo",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "19.90",
+									"type": "text"
+								},
+								{
+									"key": "slug",
+									"value": "apartamento",
+									"type": "text"
+								},
+								{
+									"key": "bedrooms",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "bathrooms",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "property_area",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "total_property_area",
+									"value": "400",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/categories/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"categories",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/users/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Teste",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "teste@teste.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Teste 2",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "teste@teste.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/users/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Apartamento Edited",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Apartamento no Jardins",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Conteúdo",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "19.90",
+									"type": "text"
+								},
+								{
+									"key": "slug",
+									"value": "apartamento",
+									"type": "text"
+								},
+								{
+									"key": "bedrooms",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "bathrooms",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "property_area",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "total_property_area",
+									"value": "400",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/users/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"4"
 							]
 						}
 					},
@@ -402,7 +870,7 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "teste@teste.com.br",
+									"value": "rubensherculano@hotmail.com",
 									"type": "text"
 								},
 								{

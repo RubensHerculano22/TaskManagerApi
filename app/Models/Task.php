@@ -10,9 +10,18 @@ class Task extends Model
 {
     use HasFactory;
 
+    protected $appends = ['_links'];
     protected $fillable = [
         'category_id', 'user_id', 'title', 'description', 'date_limit', 'done'
     ];
+
+    public function getLinksAttribute()
+    {
+        return [
+            'href'  => route('tasks.tasksShow', $this->id),
+            'rel'   => 'Tarefas'
+        ];
+    }
 
     public function user()
     {

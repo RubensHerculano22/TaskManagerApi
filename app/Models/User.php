@@ -43,6 +43,16 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = ['_links'];
+
+    public function getLinksAttribute()
+    {
+        return [
+            'href'  => route('users.usersShow', $this->id),
+            'rel'   => 'Usuário'
+        ];
+    }
+
     public function task()
     {
         return $this->hasMany(Task::class);

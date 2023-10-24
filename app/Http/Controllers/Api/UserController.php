@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Api\ApiMessages;
-use App\Http\Requests\CategoryRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\User;
+use App\Api\ApiMessages;
 
-class CategoryController extends Controller
+class UserController extends Controller
 {
+    private $user;
 
-    private $category;
-
-    public function __construct(Category $category)
+    public function __construct(User $user)
     {
-        $this->category = $category;
+        $this->user = $user;
     }
     /**
      * Display a listing of the resource.
@@ -24,9 +23,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this->category->paginate('10');
+        $users = $this->user->paginate('10');
 
-        return response()->json($categories, 200);
+        return response()->json($users, 200);
     }
 
     /**
@@ -35,16 +34,25 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(Request $request)
     {
         $data = $request->all();
 
+        if(!$request->has('password') || !$request->get('password'))
+        {
+            $message = new ApiMessages('É necessário informar uma senha para o usuário');
+            return response()->json(['error' => $message->getMessage()], 401);
+        }
+
         try {
-            $category = $this->category->create($data); //Mass Asignment
+
+            $data['password'] = bcrypt($data['password']);
+
+            $user = $this->user->create($data); //Mass Asignment
 
             return response()->json([
                 'data' => [
-                    'msg' => 'Categoria cadastrada com sucesso!'
+                    'msg' => 'Usuário cadastrado com sucesso!'
                 ]
             ], 200);
         } catch (\Exception $e) {
@@ -62,10 +70,10 @@ class CategoryController extends Controller
     public function show($id)
     {
         try {
-            $category = $this->category->findOrFail($id);
 
+            $user = $this->user->findOrFail($id);
             return response()->json([
-                'data' => $category
+                'data' => $user
             ], 200);
         } catch (\Exception $e) {
             $message = new ApiMessages($e->getMessage());
@@ -80,17 +88,22 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $data = $request->all();
+        
+        if($request->has('password') && $request->get('password'))
+            $data['password'] = bcrypt($data['password']);
+        else
+            unset($data['password']);
 
         try {
-            $category = $this->category->findOrFail($id);
-            $category->update($data); //Mass Asignment
+            $user = $this->user->findOrFail($id);
+            $user->update($data); //Mass Asignment
 
             return response()->json([
                 'data' => [
-                    'msg' => 'Categoria atualizada com sucesso!'
+                    'msg' => 'Usuário atualizado com sucesso!'
                 ]
             ], 200);
         } catch (\Exception $e) {
@@ -108,12 +121,13 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         try {
-            $category = $this->category->findOrFail($id);
-            $category->delete(); //Mass Asignment
+
+            $user = $this->user->findOrFail($id);
+            $user->delete(); //Mass Asignment
 
             return response()->json([
                 'data' => [
-                    'msg' => 'Categoria removida com sucesso!'
+                    'msg' => 'Usuário removido com sucesso!'
                 ]
             ], 200);
         } catch (\Exception $e) {
