@@ -26,7 +26,7 @@ class TaskRequest extends FormRequest
         return [
             'title' => 'required',
             'description' => 'required',
-            'date_limited' => 'required',
+            'date_limit' => 'required',
             'done' => 'required'
         ];
     }

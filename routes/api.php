@@ -30,7 +30,7 @@ Route::prefix('v1')->namespace('Api')->group(function(){
 
         Route::name('tasks.')->group(function(){
             Route::get('tasks/', [TaskController::class, 'index']);
-            Route::get('tasks/{id}', [TaskController::class, 'show'])->name('real_states_show');
+            Route::get('tasks/{id}', [TaskController::class, 'show']);
             Route::post('tasks/', [TaskController::class, 'store']);
             Route::put('tasks/{id}', [TaskController::class, 'update']);
             Route::delete('tasks/{id}', [TaskController::class, 'destroy']);

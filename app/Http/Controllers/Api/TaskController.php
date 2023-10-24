@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Api\ApiMessages;
 use App\Http\Requests\TaskRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $task = auth('api')->user()->task();
+        $task = auth('api')->user()->task()->with('user')->with('category');
 
         return response()->json($task->paginate('10'), 200);
     }
@@ -37,7 +38,21 @@ class TaskController extends Controller
      */
     public function store(TaskRequest $request)
     {
-        //
+        $data = $request->all();
+
+        try {
+            $data['user_id'] = auth('api')->user()->id;
+            $task = $this->task->create($data); //Mass Asignment
+
+            return response()->json([
+                'data' => [
+                    'msg' => 'Tarefa cadastrado com sucesso!'
+                ]
+            ], 200);
+        } catch (\Exception $e) {
+            $message = new ApiMessages($e->getMessage());
+            return response()->json(['error' => $message->getMessage()], 401);
+        }
     }
 
     /**
@@ -48,7 +63,16 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $task = auth('api')->user()->task()->with('user')->with('category')->findOrFail($id);
+
+            return response()->json([
+                'data' => $task
+            ], 200);
+        } catch (\Exception $e) {
+            $message = new ApiMessages($e->getMessage());
+            return response()->json(['error' => $message->getMessage()], 401);
+        }
     }
 
     /**
@@ -60,7 +84,22 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, $id)
     {
-        //
+        $data = $request->all();
+
+        try {
+
+            $task = auth('api')->user()->task()->findOrFail($id);
+            $task->update($data); //Mass Asignment
+
+            return response()->json([
+                'data' => [
+                    'msg' => 'Tarefa atualizado com sucesso!'
+                ]
+            ], 200);
+        } catch (\Exception $e) {
+            $message = new ApiMessages($e->getMessage());
+            return response()->json(['error' => $message->getMessage()], 401);
+        }
     }
 
     /**
@@ -71,6 +110,19 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+
+            $task = auth('api')->user()->task()->findOrFail($id);
+            $task->delete(); //Mass Asignment
+
+            return response()->json([
+                'data' => [
+                    'msg' => 'Tarefa removido com sucesso!'
+                ]
+            ], 200);
+        } catch (\Exception $e) {
+            $message = new ApiMessages($e->getMessage());
+            return response()->json(['error' => $message->getMessage()], 401);
+        }
     }
 }

@@ -23,8 +23,8 @@ class TaskFactory extends Factory
             'user_id' => User::all()->random(),
             'title' => fake()->name(),
             'description' => fake()->text(),
-            'date_limit' => fake()->date('Y-m-d'),
-            'done' => fake()->randomNumber(1, true)
+            'date_limit' => fake()->dateTimeBetween($startDate = 'now', $endDate = '+1 month', $timezone = 'America/Sao_Paulo'),
+            'done' => fake()->numberBetween(0, 1)
         ];
     }
 }
